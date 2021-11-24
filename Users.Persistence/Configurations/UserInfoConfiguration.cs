@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Users.Persistence.Models;
+using Users.Domain.Entities;
 
 namespace Users.Persistence.Configurations
 {
-    public class UserInfoConfiguration : IEntityTypeConfiguration<UserInfoModel>
+    public class UserInfoConfiguration : IEntityTypeConfiguration<UserInfo>
     {
-        public void Configure(EntityTypeBuilder<UserInfoModel> builder)
+        public void Configure(EntityTypeBuilder<UserInfo> builder)
         {
             builder.ToTable("UsersInfo");
             builder.HasKey(u => u.Id);

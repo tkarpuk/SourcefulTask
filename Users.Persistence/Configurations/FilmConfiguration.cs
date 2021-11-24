@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Users.Persistence.Models;
+using Users.Domain.Entities;
 
 namespace Users.Persistence.Configurations
 {
-    public class FilmConfiguration : IEntityTypeConfiguration<FilmModel>
+    public class FilmConfiguration : IEntityTypeConfiguration<Film>
     {
-        public void Configure(EntityTypeBuilder<FilmModel> builder)
+        public void Configure(EntityTypeBuilder<Film> builder)
         {
             builder.ToTable("Films");
             builder.HasKey(f => f.Id);
-            builder.HasOne<UserInfoModel>(f => f.User).WithMany(u => u.Films)
+            builder.HasOne<UserInfo>(f => f.User).WithMany(u => u.Films)
                 .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 

@@ -8,5 +8,7 @@ namespace Users.Domain.Entities
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public DateTime Year { get; set; }
+
+        public UserInfo User { get; set; }
     }
 }

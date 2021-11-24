@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Users.Persistence.Models;
+using Users.Domain.Entities;
 
 namespace Users.Persistence.Configurations
 {
-    public class AddressConfiguration : IEntityTypeConfiguration<AddressModel>
+    public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
-        public void Configure(EntityTypeBuilder<AddressModel> builder)
+        public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.ToTable("Addresses");
             builder.HasKey(a => a.Id);
-            builder.HasOne<UserInfoModel>(a => a.User).WithMany(u => u.Addresses)
+            builder.HasOne<UserInfo>(a => a.User).WithMany(u => u.Addresses)
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
