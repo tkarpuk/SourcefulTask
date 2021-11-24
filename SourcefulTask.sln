@@ -16,10 +16,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{7756A969-088B-4181-AFC0-682D377C87B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Application", "Users.Application\Users.Application.csproj", "{24533660-DBC1-4A6E-80E8-31580C078DA6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AC02B6FB-7FCF-4746-8E94-F204115F0D3B} = {AC02B6FB-7FCF-4746-8E94-F204115F0D3B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Domain", "Users.Domain\Users.Domain.csproj", "{AC02B6FB-7FCF-4746-8E94-F204115F0D3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Persistence", "Users.Persistence\Users.Persistence.csproj", "{665546CE-D5F9-4483-BE08-E9E8155735D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{24533660-DBC1-4A6E-80E8-31580C078DA6} = {24533660-DBC1-4A6E-80E8-31580C078DA6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.WebApi", "Users.WebApi\Users.WebApi.csproj", "{55A99F94-7D2E-4327-9EBE-11748E2250D3}"
 EndProject
