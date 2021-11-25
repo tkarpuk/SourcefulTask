@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using Users.Domain.Entities;
 
 namespace Users.Persistence.Configurations
@@ -15,6 +16,7 @@ namespace Users.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(f => f.Name).IsRequired().HasMaxLength(100);
+            builder.Property(f => f.DateComeUp).HasDefaultValue(new DateTime(1900, 1, 1));
         }
     }
 }
