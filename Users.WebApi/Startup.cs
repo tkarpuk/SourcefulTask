@@ -21,6 +21,15 @@ namespace Users.WebApi
         {
             services.AddControllers();
             services.AddPersistence(_configuration.GetConnectionString("DbConnection"));
+
+            services.AddCors(options =>
+                options.AddPolicy("AllowOrigin", policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyMethod();
+                })
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,8 +38,9 @@ namespace Users.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseRouting();
+            app.UseCors("AllowOrigin");
 
             app.UseEndpoints(endpoints =>
             {
