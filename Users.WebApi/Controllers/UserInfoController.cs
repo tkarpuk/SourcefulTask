@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Users.WebApi.DTO;
@@ -27,7 +25,7 @@ namespace Users.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetList()
         {
             var query = new GetUserListQuery()
             {
@@ -39,12 +37,45 @@ namespace Users.WebApi.Controllers
             return Ok(userList);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetDetails(Guid id)
+        {
+            var query = new GetUserDetailsQuery()
+            {
+                Id = id
+            };
+            var user = _mapper.Map<UserDto>(await _mediator.Send(query));
+
+            return user;
+        }
+
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateUser(UserDto userDto)
         {
             var command = _mapper.Map<CreateUserCommand>(userDto);            
             var userId = await _mediator.Send(command);
             return Ok(userId);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UserDto userDto)
+        {
+            var command = _mapper.Map<UpdateUserCommand>(userDto);
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var command = new DeleteUserCommand()
+            {
+                Id = id
+            };
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }
