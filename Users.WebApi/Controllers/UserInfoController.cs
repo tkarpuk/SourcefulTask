@@ -50,7 +50,7 @@ namespace Users.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateUser(UserDto userDto)
+        public async Task<ActionResult<Guid>> Create(UserDto userDto)
         {
             var command = _mapper.Map<CreateUserCommand>(userDto);            
             var userId = await _mediator.Send(command);
