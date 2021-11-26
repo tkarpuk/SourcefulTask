@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Users.Persistence;
 using Users.WebApi.Mappings;
 using Microsoft.OpenApi.Models;
+using MediatR;
+using System;
 
 namespace Users.WebApi
 {
@@ -23,6 +25,8 @@ namespace Users.WebApi
             services.AddControllers();
             services.AddPersistence(_configuration.GetConnectionString("DbConnection"));
             services.AddAutomapperExt();
+
+            services.AddMediatR(AppDomain.CurrentDomain.Load("Users.Application"));
 
             services.AddSwaggerGen(c =>
             {
