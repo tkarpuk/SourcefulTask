@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Users.Persistence;
-using Users.Application.Interfaces;
 
 namespace Users.WebApi
 {
@@ -20,7 +19,7 @@ namespace Users.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddControllers();
             services.AddPersistence(_configuration.GetConnectionString("DbConnection"));
         }
 
@@ -35,10 +34,7 @@ namespace Users.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
