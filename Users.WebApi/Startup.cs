@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Users.Persistence;
+using Users.WebApi.Mappings;
 
 namespace Users.WebApi
 {
@@ -21,6 +21,7 @@ namespace Users.WebApi
         {
             services.AddControllers();
             services.AddPersistence(_configuration.GetConnectionString("DbConnection"));
+            services.AddAutomapperExt();
 
             services.AddCors(options =>
                 options.AddPolicy("AllowOrigin", policy =>
