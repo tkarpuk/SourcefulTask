@@ -15,7 +15,7 @@ namespace Users.WebApi.Mappings
 
             CreateMap<CreateUserCommand, UserDto>().ReverseMap();
             CreateMap<UpdateUserCommand, UserDto>().ReverseMap();
-            //CreateMap<Film, FilmDto>().ReverseMap();
+
         }
     }
 }
