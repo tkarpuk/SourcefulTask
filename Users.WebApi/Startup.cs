@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Users.Persistence;
 using Users.WebApi.Mappings;
+using Microsoft.OpenApi.Models;
 
 namespace Users.WebApi
 {
@@ -22,6 +23,11 @@ namespace Users.WebApi
             services.AddControllers();
             services.AddPersistence(_configuration.GetConnectionString("DbConnection"));
             services.AddAutomapperExt();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sourceful Test Task", Version = "v1" });
+            });
 
             services.AddCors(options =>
                 options.AddPolicy("AllowOrigin", policy =>
@@ -42,6 +48,13 @@ namespace Users.WebApi
             
             app.UseRouting();
             app.UseCors("AllowOrigin");
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sourceful Test Task V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseEndpoints(endpoints =>
             {
